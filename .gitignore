@@ -1,0 +1,35 @@
+
+# Eclipse
+.classpath
+.metadata
+.project
+.settings/
+bin/
+*.class
+dist/
+ 
+# Intellij
+.idea/
+*.iml
+*.iws
+ 
+# Mac
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+ 
+# Maven
+log/
+target/
+ 
+# Misc
+*.swp
+*.bak
+.svn
+.vagrant
+*.orig
+
