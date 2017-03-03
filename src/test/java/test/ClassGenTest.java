@@ -1,6 +1,8 @@
 package test;
 
 import java.io.File;
+import java.sql.JDBCType;
+
 import javax.lang.model.element.Modifier;
 
 import com.squareup.javapoet.FieldSpec;
@@ -27,7 +29,8 @@ public class ClassGenTest {
 		JavaFile javaFile = JavaFile.builder("com.example.helloworld", helloWorld).build();
 		
 		String path = ClassGenTest.class.getResource("/").getPath().toString();
-		System.out.println(path);
+//		System.out.println(path);
+		System.out.println(JDBCType.ARRAY.getName());
 		// javaFile.writeTo(new File(path));
 		javaFile.writeTo(System.out);
 	}

@@ -2,7 +2,9 @@ package org.mvc.conf.handler;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,12 +14,14 @@ import org.mvc.api.TableColumnApi;
 import org.mvc.conf.PropertyFactory;
 import org.mvc.exception.InvaildPropertiesException;
 import org.mvc.poet.PoetApply;
+import org.mvc.util.JdbcUtil;
 import org.mvc.util.StringUtils;
 
 public class TableColumnHandler implements TableColumnApi {
 
 	private Connection connection;
 	private PropertyFactory factory;
+	private DatabaseMetaData schemas;
 	private List<String> tableNames = new ArrayList<String>();
 	private boolean tableFlag = true;
 
@@ -34,16 +38,16 @@ public class TableColumnHandler implements TableColumnApi {
 			throw new InvaildPropertiesException("properties must be not null!");
 		}
 		try {
-			DatabaseMetaData schemas = connection.getMetaData();
-			ResultSet resultTable = schemas.getTables(factory.getProperty("database.name"), null, "%", null);
+			ResultSet resultSet = schemas.getTables(factory.getProperty("database.name"), null, "%", null);
 			// get all the table name
-			while (resultTable.next()) {
-				tableNames.add(resultTable.getString(3));
+			while (resultSet.next()) {
+				tableNames.add(resultSet.getString(3));
 			}
 			for (Iterator iterator = tableNames.iterator(); iterator.hasNext();) {
 				String table = (String) iterator.next();
 				parseColumn(table);
 			}
+			JdbcUtil.close(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -52,17 +56,13 @@ public class TableColumnHandler implements TableColumnApi {
 	@Override
 	public void parseColumn(String table) {
 		try {
-			DatabaseMetaData schemas = connection.getMetaData();
-			ResultSet resultColumn = schemas.getColumns(null, null, "export", "%");
-			 List<String> coulmns = new ArrayList<String>();
-			while (resultColumn.next()) {
-				 coulmns.add(resultColumn.getString(4));
-				String column = resultColumn.getString(4);
-//				System.out.println(resultColumn.getString(4));
-//				System.out.println(resultColumn.getRow());
-//				 resolveColumn(table,column);
+			ResultSet resultSet = schemas.getColumns(factory.getProperty("database.name"), null, table, "%");
+			List<String> coulmns = new ArrayList<String>();
+			while (resultSet.next()) {
+				coulmns.add(resultSet.getString(4));
 			}
-			 resolveColumn(table,coulmns);
+			parseColumnType(table);
+			resolveColumn(table,coulmns);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -74,9 +74,28 @@ public class TableColumnHandler implements TableColumnApi {
 			PoetApply.buildEntity(table, coulmns);
 		}
 	}
-	@Override
-	public void parseColumnType() {
 
+	@Override
+	public void parseColumnType(String table) {
+		ResultSet resultSet =null;
+		try {
+			StringBuilder builder = new StringBuilder();
+			builder.append("SELECT DATA_TYPE FROM `COLUMNS` WHERE TABLE_SCHEMA=").append("'").append(factory.getProperty("database.name"))
+					.append("'").append(" AND TABLE_NAME=").append("'").append(table).append("';");
+			PreparedStatement statement = connection.prepareStatement(builder.toString());
+			statement.executeQuery();
+			resultSet = statement.getResultSet();
+			ResultSetMetaData metaData = resultSet.getMetaData();
+			int total = metaData.getColumnCount();
+			while (resultSet.next()) {
+				System.out.println(resultSet.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JdbcUtil.close(resultSet);
+		}
 	}
 
 	@Override
@@ -84,9 +103,12 @@ public class TableColumnHandler implements TableColumnApi {
 		this.connection = connection;
 		this.factory = factory;
 		try {
+			this.schemas = connection.getMetaData();
 			parseTable();
 		} catch (InvaildPropertiesException e) {
 			e.printStackTrace();
+		} catch (SQLException e) {
+
 		}
 	}
 

@@ -3,6 +3,7 @@ package org.mvc.util;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -63,6 +64,16 @@ public class JdbcUtil {
 		if (connection != null) {
 			try {
 				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public static void close(ResultSet resultSet) {
+		if (resultSet != null) {
+			try {
+				resultSet.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

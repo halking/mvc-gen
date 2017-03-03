@@ -2,6 +2,9 @@ package org.mvc.poet;
 
 import javax.lang.model.element.Modifier;
 
+import org.mvc.api.PropertyHolder;
+import org.mvc.conf.handler.PropertiesHandler;
+
 import static org.mvc.util.StringUtils.letterSecondUpper;
 import static org.mvc.util.StringUtils.letterUpper;
 
@@ -16,6 +19,8 @@ import com.squareup.javapoet.ParameterSpec;
 import com.squareup.javapoet.TypeSpec;
 
 public class PoetApply {
+
+	private PropertyHolder holder;
 
 	public static void buildEntity(String table, List<String> columns) {
 		TypeSpec typeSpec = null;
@@ -56,6 +61,14 @@ public class PoetApply {
 	}
 
 	public static void buildController(String... params) {
+
+	}
+
+	public static void buildCommonInterface(String... params) {
+
+	}
+
+	public static void buildModuleInterface(String... params) {
 
 	}
 }
