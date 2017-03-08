@@ -41,5 +41,10 @@
 			<artifactId>javapoet</artifactId>
 			<version>1.8.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>11.0.2</version>
+		</dependency>
 	</dependencies>
 </project>
