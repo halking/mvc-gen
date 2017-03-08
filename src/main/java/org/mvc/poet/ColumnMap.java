@@ -20,26 +20,26 @@ public class ColumnMap {
 		int len = StringUtils.cutSingure(tableDesc.getColumnLen());
 		switch (tableDesc.getColumnType()) {
 		case "bit":
-			if (len> 1 && len<= 8) {
+			if (len > 1 && len <= 8) {
 				return byte.class;
-			} else if (len> 8 && len<= 16) {
+			} else if (len > 8 && len <= 16) {
 				return short.class;
-			} else if (len> 16 && len<= 32) {
+			} else if (len > 16 && len <= 32) {
 				return Integer.class;
-			} else if (len> 32 && len<= 64) {
+			} else if (len > 32 && len <= 64) {
 				return long.class;
 			} else {
 				return boolean.class;
 			}
 		case "tinyint":
-			if (len== 1) {
+			if (len == 1) {
 				return boolean.class;
 			}
 			return boolean.class;
 		case "smallint":
 			return short.class;
 		case "int":
-			if (len== 1) {
+			if (len == 1) {
 				return boolean.class;
 			}
 			return Integer.class;

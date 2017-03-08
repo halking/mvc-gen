@@ -4,11 +4,9 @@ import java.util.Set;
 
 import javax.lang.model.element.Modifier;
 
-public abstract class AbstractBaseSpec implements BaseSpec {
+public abstract class AbstractBaseSpec  implements BaseSpec {
 		public  String name;
 		public  String returnType;
-		public  String parameter;
-		public  String parameterType;
 		public Set<Modifier> modifiers;
 		
 		public Set<Modifier> getModifiers() {

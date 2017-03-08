@@ -31,7 +31,7 @@ public class ClassGenTest {
 		String path = ClassGenTest.class.getResource("/").getPath().toString();
 //		System.out.println(path);
 		System.out.println(JDBCType.ARRAY.getName());
-		// javaFile.writeTo(new File(path));
+		 javaFile.writeTo(new File(path));
 		javaFile.writeTo(System.out);
 	}
 

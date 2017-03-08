@@ -6,11 +6,11 @@ import java.util.Set;
 import javax.lang.model.element.Modifier;
 
 import org.mvc.api.AbstractBaseSpec;
+import org.mvc.util.StringUtils;
 import org.mvc.util.VerdictUtil;
 
-public class MethodDesc extends AbstractBaseSpec{
-	
-	public MethodDesc(Builder builder) {
+public class ParameterDesc extends AbstractBaseSpec {
+	public ParameterDesc(Builder builder) {
 		// TODO Auto-generated constructor stub
 		this.name = builder.name;
 		this.returnType = builder.returnType;
@@ -18,8 +18,8 @@ public class MethodDesc extends AbstractBaseSpec{
 	}
 	 
 	public static Builder builder(String name,String returnType,Modifier... modifier) {
-		VerdictUtil.checkNotNull(name, "variable name is null", new Object[0]);
-		VerdictUtil.checkNotNull(returnType, "variable name is null", new Object[0]);
+		VerdictUtil.checkArgument(StringUtils.isNotEmpty(name), "Variable name is not valid:%s", new Object[]{name});
+		VerdictUtil.checkArgument(StringUtils.isNotEmpty(returnType), "Variable name is not valid:%s", new Object[]{returnType});
 		return new Builder(name,returnType).addModifiers(modifier);
 	}
 	
@@ -28,7 +28,7 @@ public class MethodDesc extends AbstractBaseSpec{
 		public  String returnType;
 		public Set<Modifier> modifiers;
 		
-		private   Builder(String name,String returnType) {
+		private  Builder(String name,String returnType) {
 			this.name = name;
 			this.returnType = returnType;
 		}
@@ -36,8 +36,8 @@ public class MethodDesc extends AbstractBaseSpec{
 			Collections.addAll(this.modifiers, modifiers);
 			return this;
 		}
-		public MethodDesc build() {
-			return new MethodDesc(this);
+		public ParameterDesc build() {
+			return new ParameterDesc(this);
 		}
 	}
 }

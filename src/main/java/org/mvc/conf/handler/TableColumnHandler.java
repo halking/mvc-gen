@@ -24,7 +24,6 @@ public class TableColumnHandler implements TableColumnApi {
 	private PropertyFactory factory;
 	private DatabaseMetaData schemas;
 	private List<String> tableNames = new ArrayList<String>();
-	private boolean tableFlag = true;
 
 	public Connection getConnection() {
 		return connection;
@@ -48,6 +47,7 @@ public class TableColumnHandler implements TableColumnApi {
 				String table = (String) iterator.next();
 				parseColumn(table);
 			}
+			PoetApply.transTable(tableNames);
 			JdbcUtil.close(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,10 +56,10 @@ public class TableColumnHandler implements TableColumnApi {
 
 	@Override
 	public void parseColumn(String table) {
-		List<TableDesc> tableDescs = new ArrayList<TableDesc>();
+		 List<TableDesc> tableDescs = new ArrayList<TableDesc>();
+		 List<String> coulmns = new ArrayList<String>();
 		try {
 			ResultSet resultSet = schemas.getColumns(factory.getProperty("database.name"), null, table, "%");
-			List<String> coulmns = new ArrayList<String>();
 			while (resultSet.next()) {
 				coulmns.add(resultSet.getString(4));
 			}
@@ -81,7 +81,7 @@ public class TableColumnHandler implements TableColumnApi {
 	@Override
 	public List<TableDesc> parseColumnType(String table) {
 		ResultSet resultSet = null;
-		List<TableDesc> tableDescs = new ArrayList<TableDesc>();
+		 List<TableDesc> tableDescs = new ArrayList<TableDesc>();
 		try {
 			StringBuilder builder = new StringBuilder();
 			builder.append("SELECT * FROM `COLUMNS` WHERE TABLE_SCHEMA=").append("'").append(factory.getProperty("database.name"))
