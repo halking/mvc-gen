@@ -3,6 +3,7 @@ package org.mvc.poet;
 import javax.lang.model.element.Modifier;
 
 import org.mvc.api.PropertyHolder;
+import org.mvc.conf.TableDesc;
 import org.mvc.conf.handler.PropertiesHandler;
 
 import static org.mvc.util.StringUtils.letterSecondUpper;
@@ -22,16 +23,17 @@ public class PoetApply {
 
 	private PropertyHolder holder;
 
-	public static void buildEntity(String table, List<String> columns) {
+	public static void buildEntity(String table, List<String> columns,List<TableDesc> tableDescs) {
 		TypeSpec typeSpec = null;
 		List<FieldSpec> fieldSpecs = new ArrayList<FieldSpec>();
 		List<MethodSpec> setMethods = new ArrayList<MethodSpec>();
 		List<MethodSpec> getMethods = new ArrayList<MethodSpec>();
-		for (String column : columns) {
-			String field = letterSecondUpper(column);
-			String methodName = letterUpper(column);
-			FieldSpec fieldSpec = FieldSpec.builder(String.class, field, Modifier.PRIVATE).build();
-			ParameterSpec parameterSpec = ParameterSpec.builder(String.class, field).build();
+		for (int i = 0; i < tableDescs.size(); i++) {
+			String field = letterSecondUpper(columns.get(i));
+			String methodName = letterUpper(columns.get(i));
+			Class<?> clazz = ColumnMap.resolveColumnType(tableDescs.get(i));
+			FieldSpec fieldSpec = FieldSpec.builder(clazz, field, Modifier.PRIVATE).build();
+			ParameterSpec parameterSpec = ParameterSpec.builder(clazz, field).build();
 			MethodSpec setMethod = MethodSpec.methodBuilder("set" + methodName).addModifiers(Modifier.PUBLIC).returns(void.class)
 					.addParameter(parameterSpec).addStatement("this.$N = $N", field, field).build();
 			MethodSpec getMethod = MethodSpec.methodBuilder("get" + methodName).addModifiers(Modifier.PUBLIC).returns(String.class)
@@ -52,15 +54,15 @@ public class PoetApply {
 		}
 	}
 
-	public static void buildDao(String... params) {
+	public static void buildDao(String table) {
 
 	}
 
-	public static void buildService(String... params) {
+	public static void buildService(String table) {
 
 	}
 
-	public static void buildController(String... params) {
+	public static void buildController() {
 
 	}
 

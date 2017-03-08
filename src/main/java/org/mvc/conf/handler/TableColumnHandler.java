@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.mvc.api.TableColumnApi;
 import org.mvc.conf.PropertyFactory;
+import org.mvc.conf.TableDesc;
 import org.mvc.exception.InvaildPropertiesException;
 import org.mvc.poet.PoetApply;
 import org.mvc.util.JdbcUtil;
@@ -55,47 +56,50 @@ public class TableColumnHandler implements TableColumnApi {
 
 	@Override
 	public void parseColumn(String table) {
+		List<TableDesc> tableDescs = new ArrayList<TableDesc>();
 		try {
 			ResultSet resultSet = schemas.getColumns(factory.getProperty("database.name"), null, table, "%");
 			List<String> coulmns = new ArrayList<String>();
 			while (resultSet.next()) {
 				coulmns.add(resultSet.getString(4));
 			}
-			parseColumnType(table);
-			resolveColumn(table,coulmns);
+			tableDescs = parseColumnType(table);
+			resolveColumn(table, coulmns,tableDescs);
+			JdbcUtil.close(resultSet);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 
-	public void resolveColumn(String table, List<String> coulmns) {
+	public void resolveColumn(String table, List<String> coulmns,List<TableDesc> tableDescs) {
 		if (StringUtils.isNotEmpty(table)) {
 			table = StringUtils.letterUpper(table);
-			PoetApply.buildEntity(table, coulmns);
+			PoetApply.buildEntity(table, coulmns,tableDescs);
 		}
 	}
 
 	@Override
-	public void parseColumnType(String table) {
-		ResultSet resultSet =null;
+	public List<TableDesc> parseColumnType(String table) {
+		ResultSet resultSet = null;
+		List<TableDesc> tableDescs = new ArrayList<TableDesc>();
 		try {
 			StringBuilder builder = new StringBuilder();
-			builder.append("SELECT DATA_TYPE FROM `COLUMNS` WHERE TABLE_SCHEMA=").append("'").append(factory.getProperty("database.name"))
+			builder.append("SELECT * FROM `COLUMNS` WHERE TABLE_SCHEMA=").append("'").append(factory.getProperty("database.name"))
 					.append("'").append(" AND TABLE_NAME=").append("'").append(table).append("';");
 			PreparedStatement statement = connection.prepareStatement(builder.toString());
 			statement.executeQuery();
 			resultSet = statement.getResultSet();
-			ResultSetMetaData metaData = resultSet.getMetaData();
-			int total = metaData.getColumnCount();
 			while (resultSet.next()) {
-				System.out.println(resultSet.getString(1));
+			TableDesc tableDesc =TableDesc.builder(resultSet.getString(4),resultSet.getString(8), resultSet.getString(16)).build();
+			tableDescs.add(tableDesc);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JdbcUtil.close(resultSet);
 		}
+		return tableDescs;
 	}
 
 	@Override

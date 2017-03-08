@@ -4,6 +4,7 @@
 package org.mvc.util;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -295,10 +296,14 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     	String newStr =null;
     	str = str.toLowerCase();
     	int sepIndex = str.indexOf("_");
+    	int end = str.lastIndexOf("_");
 		char[] ch = str.toCharArray();
 		ch[0] -=32;
 		if (sepIndex>0) {
 			ch[sepIndex+1] -=32;
+			if (end>sepIndex) {
+				ch[end+1]-=32;
+			}
 			newStr= String.valueOf(ch);
 			newStr = newStr.replace("_", "");
 		}else {
@@ -323,5 +328,23 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     
     public static String getProjectPath() {
 		return System.getProperty("user.dir");
+	}
+    public static int cutSingure(String name) {
+    	List<String> datas = new ArrayList<String>();
+    	datas.add("date");
+    	datas.add("datetime");
+    	datas.add("time");
+    	datas.add("datestamp");
+    	datas.add("decimal");
+    	datas.add("numeric");
+		String prefix ="(";
+		String suffix =")";
+		int a = 0;
+		if (!datas.contains(name)) {
+			int preInd = name.indexOf(prefix);
+			int end = name.indexOf(suffix);
+			a = Integer.valueOf(name.substring(preInd+1, end));
+		}
+		return a;
 	}
 }
