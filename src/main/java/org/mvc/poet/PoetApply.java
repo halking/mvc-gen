@@ -1,25 +1,26 @@
 package org.mvc.poet;
 
+import static org.mvc.util.StringUtils.letterSecondUpper;
+import static org.mvc.util.StringUtils.letterUpper;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.lang.model.element.Modifier;
 
-import org.mvc.api.BaseSpec;
-import org.mvc.api.PropertyHolder;
+import org.mvc.conf.PropertiesConstant;
 import org.mvc.conf.PropertyFactory;
 import org.mvc.conf.TableDesc;
 import org.mvc.gen.MethodDesc;
 import org.mvc.gen.ParameterDesc;
 import org.mvc.util.VerdictUtil;
 
-import static org.mvc.util.StringUtils.letterSecondUpper;
-import static org.mvc.util.StringUtils.letterUpper;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
-import com.google.common.collect.Table;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
@@ -29,21 +30,27 @@ import com.squareup.javapoet.TypeSpec;
 public class PoetApply {
 
 	private PropertyFactory factory;
-	private Set<MethodDesc> methodDescs;
-	private Set<ParameterDesc> parameterDescs;
+	private Set<MethodDesc> methodDescs = new HashSet<MethodDesc>();
+	private List<ParameterDesc> parameterDescs = new ArrayList<ParameterDesc>();
 	private Object[] ignores;
 	private static List<String> tables = new ArrayList<String>();
-	public PoetApply(Builder builder) {
-		// TODO Auto-generated constructor stub
+
+	public PoetApply(PropertyFactory factory) {
 		this.factory = factory;
-		this.methodDescs = builder.methodDescs;
-		this.parameterDescs=builder.parameterDescs;
-		this.ignores = ignores;
 	}
+
+	private PoetApply(Builder builder) {
+		this.factory = builder.factory;
+		this.methodDescs = builder.methodDescs;
+		this.parameterDescs = builder.parameterDescs;
+		this.ignores = builder.ignores;
+	}
+
 	public static void transTable(List<String> table) {
 		tables = table;
 	}
-	public static void buildEntity(String table, List<String> columns,List<TableDesc> tableDescs) {
+
+	public void buildEntity(String table, List<String> columns, List<TableDesc> tableDescs) {
 		TypeSpec typeSpec = null;
 		List<FieldSpec> fieldSpecs = new ArrayList<FieldSpec>();
 		List<MethodSpec> setMethods = new ArrayList<MethodSpec>();
@@ -56,8 +63,15 @@ public class PoetApply {
 			ParameterSpec parameterSpec = ParameterSpec.builder(clazz, field).build();
 			MethodSpec setMethod = MethodSpec.methodBuilder("set" + methodName).addModifiers(Modifier.PUBLIC).returns(void.class)
 					.addParameter(parameterSpec).addStatement("this.$N = $N", field, field).build();
-			MethodSpec getMethod = MethodSpec.methodBuilder("get" + methodName).addModifiers(Modifier.PUBLIC).returns(String.class)
-					.addStatement("return $N", field).build();
+			MethodSpec getMethod = null;
+			if (clazz == boolean.class) {
+				getMethod = MethodSpec.methodBuilder("is" + methodName).addModifiers(Modifier.PUBLIC).returns(clazz)
+						.addStatement("return $N", field).build();
+			} else {
+				getMethod = MethodSpec.methodBuilder("get" + methodName).addModifiers(Modifier.PUBLIC).returns(clazz)
+						.addStatement("return $N", field).build();
+			}
+
 			fieldSpecs.add(fieldSpec);
 			setMethods.add(setMethod);
 			getMethods.add(getMethod);
@@ -65,67 +79,140 @@ public class PoetApply {
 
 		typeSpec = TypeSpec.classBuilder(table).addModifiers(Modifier.PUBLIC).addFields(fieldSpecs).addMethods(setMethods)
 				.addMethods(getMethods).build();
-		JavaFile javaFile = JavaFile.builder("org.mvc.poet", typeSpec).build();
+		JavaFile javaFile = JavaFile.builder(factory.getProperty("entity.pkg"), typeSpec).build();
 		try {
-			javaFile.writeTo(System.out);
+			javaFile.writeTo(new File(factory.getProperty("project.dir")));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static void buildDao(String table,Object[] ignores) {
-		
-	}
-
-	public static void buildService(String table,Object[] ignores) {
-
-	}
-
-	public static void buildController(String table,Object[] ignores) {
-
-	}
-
-	public static void buildCommonInterface(String... params) {
-
-	}
-	public static void BuildAll() {
-		List<MethodSpec> daoList = new ArrayList<MethodSpec>();
-		List<MethodSpec> serviceList = new ArrayList<MethodSpec>();
-		List<MethodSpec> conList = new ArrayList<MethodSpec>();
-		for (int i = 0; i < tables.size(); i++) {
-			
+	public void buildDao(String table, List<MethodSpec> methodSpecs, Object[] ignores) {
+		try {
+			TypeSpec typeSpec = TypeSpec.classBuilder(table + PropertiesConstant.DAO_SUFFIX).addModifiers(Modifier.PUBLIC)
+					.addMethods(methodSpecs).build();
+			JavaFile javaFile = JavaFile.builder(factory.getProperty("dao.pkg"), typeSpec).build();
+			javaFile.writeTo(new File(factory.getProperty("project.dir")));
+			// javaFile.writeTo(System.out);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
+
+	public void buildService(String table, List<MethodSpec> methodSpecs, Object[] ignores) {
+		try {
+			TypeSpec typeSpec = TypeSpec.classBuilder(table + PropertiesConstant.SERVICE_SUFFIX).addModifiers(Modifier.PUBLIC)
+					.addMethods(methodSpecs).build();
+			JavaFile javaFile = JavaFile.builder(factory.getProperty("service.pkg"), typeSpec).build();
+			javaFile.writeTo(new File(factory.getProperty("project.dir")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void buildController(String table, List<MethodSpec> methodSpecs, Object[] ignores) {
+		try {
+			TypeSpec typeSpec = TypeSpec.classBuilder(table + PropertiesConstant.CONTROLLER_SUFFIX).addModifiers(Modifier.PUBLIC)
+					.addMethods(methodSpecs).build();
+			JavaFile javaFile = JavaFile.builder(factory.getProperty("controller.pkg"), typeSpec).build();
+			javaFile.writeTo(new File(factory.getProperty("project.dir")));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void buildCommonInterface(String... params) {
+
+	}
+
+	public void buildAll(Object[] ignores) {
+		List<MethodSpec> methodList = new ArrayList<MethodSpec>();
+		for (MethodDesc methodDesc : methodDescs) {
+			MethodSpec methodSpec = null;
+			if (methodDesc.getParameterDescs().size() < 1) {
+				ParameterDesc parameterDesc = methodDesc.getParameterDescs().get(0);
+				ParameterSpec parameterSpec = ParameterSpec.builder(parameterDesc.getReturnType(), parameterDesc.getName()).build();
+				if (methodDesc.getReturnType() == void.class) {
+					methodSpec = MethodSpec.methodBuilder(methodDesc.getName()).addModifiers(Modifier.PUBLIC)
+							.returns(methodDesc.getReturnType()).addParameter(parameterSpec).build();
+				} else {
+					methodSpec = MethodSpec.methodBuilder(methodDesc.getName()).addModifiers(Modifier.PUBLIC)
+							.returns(methodDesc.getReturnType()).addParameter(parameterSpec).addStatement("return null").build();
+				}
+				methodList.add(methodSpec);
+			} else {
+				List<ParameterSpec> paramList = new ArrayList<ParameterSpec>();
+				List<ParameterDesc> parameterDescs = methodDesc.getParameterDescs();
+				for (ParameterDesc parameterDesc : parameterDescs) {
+					ParameterSpec parameterSpec = ParameterSpec.builder(parameterDesc.getReturnType(), parameterDesc.getName()).build();
+					paramList.add(parameterSpec);
+				}
+				if (methodDesc.getReturnType() == void.class) {
+					methodSpec = MethodSpec.methodBuilder(methodDesc.getName()).addModifiers(Modifier.PUBLIC)
+							.returns(methodDesc.getReturnType()).addParameters(paramList).build();
+				} else {
+					methodSpec = MethodSpec.methodBuilder(methodDesc.getName()).addModifiers(Modifier.PUBLIC)
+							.returns(methodDesc.getReturnType()).addParameters(paramList).addStatement("return null").build();
+				}
+				methodList.add(methodSpec);
+			}
+		}
+		for (String table : tables) {
+			table = letterUpper(table);
+			buildDao(table, methodList, ignores);
+			buildService(table, methodList, ignores);
+			buildController(table, methodList, ignores);
+		}
+	}
+
 	public static void buildModuleInterface(String... params) {
 
 	}
-	public static Builder codeBuilder(PropertyFactory factory,MethodDesc[] methodDesc,ParameterDesc[] parameterDesc) {
-		return new Builder(factory).addMethodDesc(methodDesc).addParameterDesc(parameterDesc);
+
+	public static Builder codeBuilder(PropertyFactory factory, MethodDesc... methodDesc) {
+		return new Builder(factory).addMethodDesc(methodDesc);
 	}
-	static class Builder{
-		private PropertyFactory factory;
-		private Set<MethodDesc> methodDescs;
-		private Set<ParameterDesc> parameterDescs;
+
+	public static Builder codeBuilder(PropertyFactory factory, List<MethodDesc> methodDescs) {
+		return new Builder(factory).addMethodDescs(methodDescs);
+	}
+
+	public static class Builder {
+		private PropertyFactory factory = new PropertyFactory();
+		private Set<MethodDesc> methodDescs = new HashSet<MethodDesc>();
+		private List<ParameterDesc> parameterDescs = new ArrayList<ParameterDesc>();
 		private Object[] ignores;
-		
-		public Builder(PropertyFactory factory) {
-			VerdictUtil.checkNotNull(factory,"factory is null",new Object[0]);
+
+		private Builder(PropertyFactory factory) {
 			this.factory = factory;
 		}
-		public  Builder addMethodDesc(MethodDesc[] methodDesc){
+
+		public Builder addMethodDesc(MethodDesc[] methodDesc) {
 			Collections.addAll(this.methodDescs, methodDesc);
 			return this;
 		}
-		public  Builder addParameterDesc(ParameterDesc[] parameterDescs){
+
+		public Builder addMethodDescs(Iterable<MethodDesc> methodDescs) {
+			VerdictUtil.checkNotNull(methodDescs, "methodDesc==null", new Object[0]);
+			for (MethodDesc methodDesc : methodDescs) {
+				this.methodDescs.add(methodDesc);
+			}
+			return this;
+		}
+
+		public Builder addParameterDesc(ParameterDesc[] parameterDescs) {
 			Collections.addAll(this.parameterDescs, parameterDescs);
 			return this;
 		}
-		public  Builder addIgnoresModel(Object[] ignores){
-			this.ignores =ignores;
+
+		public Builder addIgnoresModel(Object[] ignores) {
+			this.ignores = ignores;
 			return this;
 		}
-		public PoetApply built(){
+
+		public PoetApply build() {
 			return new PoetApply(this);
 		}
 	}

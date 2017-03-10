@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
-public class VerdictUtil {
-		
+public class VerdictUtil{
+	
 	public static <T>  T checkNotNull(T reference,String format,Object[] objects) {
 		if (reference==null) {
 			throw new NullPointerException(String.format(format, objects));
@@ -30,7 +31,7 @@ public class VerdictUtil {
 	}
 
 	public static <K, V> Map<K, V> immutableMap(Map<K, V> map) {
-		return Collections.unmodifiableMap(new LinkedHashMap<K,V>(map));
+		return Collections.unmodifiableMap(new LinkedHashMap<>(map));
 	}
 
 	public static void checkArgument(boolean condition, String format, Object[] args) {
@@ -45,9 +46,9 @@ public class VerdictUtil {
 		throw new IllegalStateException(String.format(format, args));
 	}
 	public static <T> List<T> immutableList(Collection<T> list){
-		return Collections.unmodifiableList(new ArrayList<T>(list));
+		return Collections.unmodifiableList(new ArrayList<>(list));
 	}
 	public static <T> Set<T> immutableSet(Collection<T> set) {
-		return Collections.unmodifiableSet(new LinkedHashSet<T>(set));
+		return Collections.unmodifiableSet(new LinkedHashSet<>(set));
 	}
 }

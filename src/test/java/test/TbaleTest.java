@@ -1,5 +1,9 @@
 package test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mysql.cj.fabric.xmlrpc.base.Array;
 
 public class TbaleTest {
 	public static void main(String[] args) {
@@ -18,5 +22,10 @@ public class TbaleTest {
 		int end = name.indexOf(")");
 		int a = Integer.valueOf(name.substring(preInd+1, end));
 		System.out.println(a);
+		System.out.println(String.class);
+		List<String> aList = new ArrayList<String>();
+		aList.add("a");
+		aList.add("b");
+		System.out.println(aList.get(1));
 	}
 }
