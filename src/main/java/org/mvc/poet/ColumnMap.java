@@ -59,7 +59,7 @@ public class ColumnMap {
 			return Date.class;
 		case "time":
 			return Date.class;
-		case "datestamp":
+		case "timestamp":
 			return Date.class;
 		default:
 			return String.class;

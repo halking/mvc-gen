@@ -47,7 +47,6 @@ public class TableColumnHandler implements TableColumnApi {
 				String table = (String) iterator.next();
 				parseColumn(table);
 			}
-			PoetApply.transTable(tableNames);
 			JdbcUtil.close(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,7 +73,8 @@ public class TableColumnHandler implements TableColumnApi {
 	public void resolveColumn(String table, List<String> coulmns,List<TableDesc> tableDescs) {
 		if (StringUtils.isNotEmpty(table)) {
 			table = StringUtils.letterUpper(table);
-			PoetApply.buildEntity(table, coulmns,tableDescs);
+			PoetApply apply = new PoetApply(this.factory);
+			apply.buildEntity(table, coulmns,tableDescs);
 		}
 	}
 

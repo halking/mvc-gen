@@ -315,9 +315,13 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     	String newStr =null;
     	str = str.toLowerCase();
     	int sepIndex = str.indexOf("_");
+    	int end = str.lastIndexOf("_");
 		char[] ch = str.toCharArray();
 		if (sepIndex>0) {
 			ch[sepIndex+1] -=32;
+			if (end>sepIndex) {
+				ch[end+1]-=32;
+			}
 			newStr= String.valueOf(ch);
 			newStr = newStr.replace("_", "");
 		}else {
@@ -334,16 +338,22 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     	datas.add("date");
     	datas.add("datetime");
     	datas.add("time");
-    	datas.add("datestamp");
+    	datas.add("timestamp");
     	datas.add("decimal");
     	datas.add("numeric");
 		String prefix ="(";
 		String suffix =")";
+		int preInd = name.indexOf(prefix);
+		int end = name.indexOf(suffix);
+		String typeName =null;
+		if (preInd>0 && end>preInd) {
+			typeName= name.substring(0,preInd);
+		}
 		int a = 0;
-		if (!datas.contains(name)) {
-			int preInd = name.indexOf(prefix);
-			int end = name.indexOf(suffix);
-			a = Integer.valueOf(name.substring(preInd+1, end));
+		if (!datas.contains(typeName)) {
+			if (preInd>0) {
+				a = Integer.valueOf(name.substring(preInd+1, end));
+			}
 		}
 		return a;
 	}

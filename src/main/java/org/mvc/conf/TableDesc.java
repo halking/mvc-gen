@@ -11,7 +11,7 @@ public class TableDesc {
 	private boolean nullable;
 	private String comment;
 
-	public TableDesc(Builder builder) {
+	private TableDesc(Builder builder) {
 		// TODO Auto-generated constructor stub
 		this.schemaName = builder.schemaName;
 		this.tableName = builder.tableName;
