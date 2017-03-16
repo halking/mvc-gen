@@ -5,7 +5,7 @@ import java.lang.String;
 public class ServiceInformation {
   private long id;
 
-  private long localModelid;
+  private long localModelId;
 
   private String serviceCode;
 
@@ -19,8 +19,8 @@ public class ServiceInformation {
     this.id = id;
   }
 
-  public void setLocalModelId(long localModelid) {
-    this.localModelid = localModelid;
+  public void setLocalModelId(long localModelId) {
+    this.localModelId = localModelId;
   }
 
   public void setServiceCode(String serviceCode) {
@@ -44,7 +44,7 @@ public class ServiceInformation {
   }
 
   public long getLocalModelId() {
-    return localModelid;
+    return localModelId;
   }
 
   public String getServiceCode() {

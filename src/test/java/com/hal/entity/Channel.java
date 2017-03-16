@@ -9,11 +9,11 @@ public class Channel {
 
   private String reference;
 
-  private long localReferenceid;
+  private long localReferenceId;
 
   private String localReference;
 
-  private long refChannelid;
+  private long refChannelId;
 
   private String code;
 
@@ -33,16 +33,16 @@ public class Channel {
     this.reference = reference;
   }
 
-  public void setLocalReferenceId(long localReferenceid) {
-    this.localReferenceid = localReferenceid;
+  public void setLocalReferenceId(long localReferenceId) {
+    this.localReferenceId = localReferenceId;
   }
 
   public void setLocalReference(String localReference) {
     this.localReference = localReference;
   }
 
-  public void setRefChannelId(long refChannelid) {
-    this.refChannelid = refChannelid;
+  public void setRefChannelId(long refChannelId) {
+    this.refChannelId = refChannelId;
   }
 
   public void setCode(String code) {
@@ -70,7 +70,7 @@ public class Channel {
   }
 
   public long getLocalReferenceId() {
-    return localReferenceid;
+    return localReferenceId;
   }
 
   public String getLocalReference() {
@@ -78,7 +78,7 @@ public class Channel {
   }
 
   public long getRefChannelId() {
-    return refChannelid;
+    return refChannelId;
   }
 
   public String getCode() {

@@ -5,7 +5,7 @@ import java.lang.String;
 public class LocalModelLabel {
   private long id;
 
-  private long localModelid;
+  private long localModelId;
 
   private String language;
 
@@ -15,8 +15,8 @@ public class LocalModelLabel {
     this.id = id;
   }
 
-  public void setLocalModelId(long localModelid) {
-    this.localModelid = localModelid;
+  public void setLocalModelId(long localModelId) {
+    this.localModelId = localModelId;
   }
 
   public void setLanguage(String language) {
@@ -32,7 +32,7 @@ public class LocalModelLabel {
   }
 
   public long getLocalModelId() {
-    return localModelid;
+    return localModelId;
   }
 
   public String getLanguage() {

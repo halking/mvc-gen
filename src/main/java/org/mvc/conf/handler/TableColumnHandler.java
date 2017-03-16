@@ -47,7 +47,6 @@ public class TableColumnHandler implements TableColumnApi {
 				String table = (String) iterator.next();
 				parseColumn(table);
 			}
-			PoetApply.transTable(tableNames);
 			JdbcUtil.close(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();

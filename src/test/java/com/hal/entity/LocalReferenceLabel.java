@@ -5,7 +5,7 @@ import java.lang.String;
 public class LocalReferenceLabel {
   private long id;
 
-  private long localReferenceid;
+  private long localReferenceId;
 
   private String language;
 
@@ -15,8 +15,8 @@ public class LocalReferenceLabel {
     this.id = id;
   }
 
-  public void setLocalReferenceId(long localReferenceid) {
-    this.localReferenceid = localReferenceid;
+  public void setLocalReferenceId(long localReferenceId) {
+    this.localReferenceId = localReferenceId;
   }
 
   public void setLanguage(String language) {
@@ -32,7 +32,7 @@ public class LocalReferenceLabel {
   }
 
   public long getLocalReferenceId() {
-    return localReferenceid;
+    return localReferenceId;
   }
 
   public String getLanguage() {

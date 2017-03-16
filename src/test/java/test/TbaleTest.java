@@ -3,7 +3,7 @@ package test;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.fabric.xmlrpc.base.Array;
+import org.mvc.util.ReflectUtil;
 
 public class TbaleTest {
 	public static void main(String[] args) {
@@ -17,15 +17,19 @@ public class TbaleTest {
 		System.out.println(String.valueOf(up));
 		
 		System.out.println(org.mvc.util.StringUtils.letterUpper(str));
-		String name = "int(10)";
+		String name = "deciaml(10,1)";
 		int preInd = name.indexOf("(");
 		int end = name.indexOf(")");
-		int a = Integer.valueOf(name.substring(preInd+1, end));
-		System.out.println(a);
+//		int a = Integer.valueOf(name.substring(preInd+1, end));
+		System.out.println(name.substring(0, preInd));
 		System.out.println(String.class);
 		List<String> aList = new ArrayList<String>();
 		aList.add("a");
 		aList.add("b");
 		System.out.println(aList.get(1));
+		Class<Object>[] classes = ReflectUtil.getAllClasses("org.mvc.util");
+		for (Class<Object> class1 : classes) {
+			System.out.println(class1);
+		}
 	}
 }

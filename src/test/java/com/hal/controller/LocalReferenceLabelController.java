@@ -1,30 +1,35 @@
 package com.hal.controller;
 
+import com.hal.entity.LocalReferenceLabel;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocalReferenceLabelController {
-  public Integer insertList(String order) {
+  public Integer updateById(String id) {
     return null;
   }
 
-  public Integer delete(String order) {
+  public Integer delete(String id) {
     return null;
   }
 
-  public Integer findEntity(String order) {
+  public LocalReferenceLabel findEntity(LocalReferenceLabel localreferencelabel) {
+    LocalReferenceLabel result = new LocalReferenceLabel();
+    return result;
+  }
+
+  public List<LocalReferenceLabel> findEntityList(LocalReferenceLabel localreferencelabel) {
+    List<LocalReferenceLabel> result = new ArrayList<>();
+    return result;
+  }
+
+  public Integer insertEntity(String id) {
     return null;
   }
 
-  public Integer findEntityList(String order) {
-    return null;
-  }
-
-  public Integer insertEntity(String order) {
-    return null;
-  }
-
-  public Integer updateById(String order) {
+  public Integer insertEntityList(List<LocalReferenceLabel> localreferencelabels) {
     return null;
   }
 }

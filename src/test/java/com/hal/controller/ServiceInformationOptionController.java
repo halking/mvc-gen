@@ -1,30 +1,35 @@
 package com.hal.controller;
 
+import com.hal.entity.ServiceInformationOption;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceInformationOptionController {
-  public Integer insertList(String order) {
+  public Integer updateById(String id) {
     return null;
   }
 
-  public Integer delete(String order) {
+  public Integer delete(String id) {
     return null;
   }
 
-  public Integer findEntity(String order) {
+  public ServiceInformationOption findEntity(ServiceInformationOption serviceinformationoption) {
+    ServiceInformationOption result = new ServiceInformationOption();
+    return result;
+  }
+
+  public List<ServiceInformationOption> findEntityList(ServiceInformationOption serviceinformationoption) {
+    List<ServiceInformationOption> result = new ArrayList<>();
+    return result;
+  }
+
+  public Integer insertEntity(String id) {
     return null;
   }
 
-  public Integer findEntityList(String order) {
-    return null;
-  }
-
-  public Integer insertEntity(String order) {
-    return null;
-  }
-
-  public Integer updateById(String order) {
+  public Integer insertEntityList(List<ServiceInformationOption> serviceinformationoptions) {
     return null;
   }
 }

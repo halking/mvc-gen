@@ -19,17 +19,17 @@ public class CountryCodeMapping {
 
   private String timezone;
 
-  private boolean isSapmanaged;
+  private boolean isSapManaged;
 
   private boolean toBecws;
 
   private boolean taxIncluded;
 
-  private String refTaxbrand;
+  private String refTaxBrand;
 
-  private boolean localSavingmgt;
+  private boolean localSavingMgt;
 
-  private boolean channelScopeextended;
+  private boolean channelScopeExtended;
 
   public void setId(long id) {
     this.id = id;
@@ -63,8 +63,8 @@ public class CountryCodeMapping {
     this.timezone = timezone;
   }
 
-  public void setIsSapManaged(boolean isSapmanaged) {
-    this.isSapmanaged = isSapmanaged;
+  public void setIsSapManaged(boolean isSapManaged) {
+    this.isSapManaged = isSapManaged;
   }
 
   public void setToBecws(boolean toBecws) {
@@ -75,16 +75,16 @@ public class CountryCodeMapping {
     this.taxIncluded = taxIncluded;
   }
 
-  public void setRefTaxBrand(String refTaxbrand) {
-    this.refTaxbrand = refTaxbrand;
+  public void setRefTaxBrand(String refTaxBrand) {
+    this.refTaxBrand = refTaxBrand;
   }
 
-  public void setLocalSavingMgt(boolean localSavingmgt) {
-    this.localSavingmgt = localSavingmgt;
+  public void setLocalSavingMgt(boolean localSavingMgt) {
+    this.localSavingMgt = localSavingMgt;
   }
 
-  public void setChannelScopeExtended(boolean channelScopeextended) {
-    this.channelScopeextended = channelScopeextended;
+  public void setChannelScopeExtended(boolean channelScopeExtended) {
+    this.channelScopeExtended = channelScopeExtended;
   }
 
   public long getId() {
@@ -120,7 +120,7 @@ public class CountryCodeMapping {
   }
 
   public boolean isIsSapManaged() {
-    return isSapmanaged;
+    return isSapManaged;
   }
 
   public boolean isToBecws() {
@@ -132,14 +132,14 @@ public class CountryCodeMapping {
   }
 
   public String getRefTaxBrand() {
-    return refTaxbrand;
+    return refTaxBrand;
   }
 
   public boolean isLocalSavingMgt() {
-    return localSavingmgt;
+    return localSavingMgt;
   }
 
   public boolean isChannelScopeExtended() {
-    return channelScopeextended;
+    return channelScopeExtended;
   }
 }

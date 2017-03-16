@@ -18,17 +18,17 @@ public class Model {
 
   private boolean visible;
 
-  private boolean availableForsale;
+  private boolean availableForSale;
 
   private Date legacyDate;
 
   private Date updateDate;
 
-  private long masterModelid;
+  private long masterModelId;
 
   private String size;
 
-  private Date selfUpdatedate;
+  private Date selfUpdateDate;
 
   public void setId(long id) {
     this.id = id;
@@ -58,8 +58,8 @@ public class Model {
     this.visible = visible;
   }
 
-  public void setAvailableForSale(boolean availableForsale) {
-    this.availableForsale = availableForsale;
+  public void setAvailableForSale(boolean availableForSale) {
+    this.availableForSale = availableForSale;
   }
 
   public void setLegacyDate(Date legacyDate) {
@@ -70,16 +70,16 @@ public class Model {
     this.updateDate = updateDate;
   }
 
-  public void setMasterModelId(long masterModelid) {
-    this.masterModelid = masterModelid;
+  public void setMasterModelId(long masterModelId) {
+    this.masterModelId = masterModelId;
   }
 
   public void setSize(String size) {
     this.size = size;
   }
 
-  public void setSelfUpdateDate(Date selfUpdatedate) {
-    this.selfUpdatedate = selfUpdatedate;
+  public void setSelfUpdateDate(Date selfUpdateDate) {
+    this.selfUpdateDate = selfUpdateDate;
   }
 
   public long getId() {
@@ -111,7 +111,7 @@ public class Model {
   }
 
   public boolean isAvailableForSale() {
-    return availableForsale;
+    return availableForSale;
   }
 
   public Date getLegacyDate() {
@@ -123,7 +123,7 @@ public class Model {
   }
 
   public long getMasterModelId() {
-    return masterModelid;
+    return masterModelId;
   }
 
   public String getSize() {
@@ -131,6 +131,6 @@ public class Model {
   }
 
   public Date getSelfUpdateDate() {
-    return selfUpdatedate;
+    return selfUpdateDate;
   }
 }

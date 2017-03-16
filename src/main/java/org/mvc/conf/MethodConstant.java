@@ -9,7 +9,7 @@ public class MethodConstant {
 		public final static String FIND_ENTITY_LIST="findEntityList";
 		public final static String FIND_ENTITY="findEntity";
 		public final static String INSERT_ENTITY="insertEntity";
-		public final static String INSERT_LIST="insertList";
+		public final static String INSERT_LIST="insertEntityList";
 		public static	List<String> methods = new ArrayList<String>();
 		static{
 			methods.add(UPDATE_BY_ID);

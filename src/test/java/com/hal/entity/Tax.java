@@ -5,20 +5,20 @@ import java.lang.String;
 public class Tax {
   private long id;
 
-  private String legacyTaxid;
+  private String legacyTaxId;
 
   private String brand;
 
   private String country;
 
-  private String orderTaxcode;
+  private String orderTaxCode;
 
   public void setId(long id) {
     this.id = id;
   }
 
-  public void setLegacyTaxId(String legacyTaxid) {
-    this.legacyTaxid = legacyTaxid;
+  public void setLegacyTaxId(String legacyTaxId) {
+    this.legacyTaxId = legacyTaxId;
   }
 
   public void setBrand(String brand) {
@@ -29,8 +29,8 @@ public class Tax {
     this.country = country;
   }
 
-  public void setOrderTaxCode(String orderTaxcode) {
-    this.orderTaxcode = orderTaxcode;
+  public void setOrderTaxCode(String orderTaxCode) {
+    this.orderTaxCode = orderTaxCode;
   }
 
   public long getId() {
@@ -38,7 +38,7 @@ public class Tax {
   }
 
   public String getLegacyTaxId() {
-    return legacyTaxid;
+    return legacyTaxId;
   }
 
   public String getBrand() {
@@ -50,6 +50,6 @@ public class Tax {
   }
 
   public String getOrderTaxCode() {
-    return orderTaxcode;
+    return orderTaxCode;
   }
 }

@@ -5,7 +5,7 @@ import java.lang.String;
 public class LocalrefTax {
   private long id;
 
-  private long localReferenceid;
+  private long localReferenceId;
 
   private long taxId;
 
@@ -17,8 +17,8 @@ public class LocalrefTax {
     this.id = id;
   }
 
-  public void setLocalReferenceId(long localReferenceid) {
-    this.localReferenceid = localReferenceid;
+  public void setLocalReferenceId(long localReferenceId) {
+    this.localReferenceId = localReferenceId;
   }
 
   public void setTaxId(long taxId) {
@@ -38,7 +38,7 @@ public class LocalrefTax {
   }
 
   public long getLocalReferenceId() {
-    return localReferenceid;
+    return localReferenceId;
   }
 
   public long getTaxId() {

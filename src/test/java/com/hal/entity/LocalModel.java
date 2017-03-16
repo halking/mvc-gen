@@ -12,7 +12,7 @@ public class LocalModel {
 
   private String brand;
 
-  private String modelNumberlocal;
+  private String modelNumberLocal;
 
   private boolean individual;
 
@@ -20,7 +20,7 @@ public class LocalModel {
 
   private boolean visible;
 
-  private boolean availableForsale;
+  private boolean availableForSale;
 
   private Date legacyDate;
 
@@ -28,9 +28,9 @@ public class LocalModel {
 
   private Date updateDate;
 
-  private boolean visibleLastvalue;
+  private boolean visibleLastValue;
 
-  private boolean sellableLastvalue;
+  private boolean sellableLastValue;
 
   private String modelNumber;
 
@@ -50,8 +50,8 @@ public class LocalModel {
     this.brand = brand;
   }
 
-  public void setModelNumberLocal(String modelNumberlocal) {
-    this.modelNumberlocal = modelNumberlocal;
+  public void setModelNumberLocal(String modelNumberLocal) {
+    this.modelNumberLocal = modelNumberLocal;
   }
 
   public void setIndividual(boolean individual) {
@@ -66,8 +66,8 @@ public class LocalModel {
     this.visible = visible;
   }
 
-  public void setAvailableForSale(boolean availableForsale) {
-    this.availableForsale = availableForsale;
+  public void setAvailableForSale(boolean availableForSale) {
+    this.availableForSale = availableForSale;
   }
 
   public void setLegacyDate(Date legacyDate) {
@@ -82,12 +82,12 @@ public class LocalModel {
     this.updateDate = updateDate;
   }
 
-  public void setVisibleLastValue(boolean visibleLastvalue) {
-    this.visibleLastvalue = visibleLastvalue;
+  public void setVisibleLastValue(boolean visibleLastValue) {
+    this.visibleLastValue = visibleLastValue;
   }
 
-  public void setSellableLastValue(boolean sellableLastvalue) {
-    this.sellableLastvalue = sellableLastvalue;
+  public void setSellableLastValue(boolean sellableLastValue) {
+    this.sellableLastValue = sellableLastValue;
   }
 
   public void setModelNumber(String modelNumber) {
@@ -111,7 +111,7 @@ public class LocalModel {
   }
 
   public String getModelNumberLocal() {
-    return modelNumberlocal;
+    return modelNumberLocal;
   }
 
   public boolean isIndividual() {
@@ -127,7 +127,7 @@ public class LocalModel {
   }
 
   public boolean isAvailableForSale() {
-    return availableForsale;
+    return availableForSale;
   }
 
   public Date getLegacyDate() {
@@ -143,11 +143,11 @@ public class LocalModel {
   }
 
   public boolean isVisibleLastValue() {
-    return visibleLastvalue;
+    return visibleLastValue;
   }
 
   public boolean isSellableLastValue() {
-    return sellableLastvalue;
+    return sellableLastValue;
   }
 
   public String getModelNumber() {

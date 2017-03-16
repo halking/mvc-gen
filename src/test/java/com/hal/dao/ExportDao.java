@@ -1,30 +1,35 @@
 package com.hal.dao;
 
+import com.hal.entity.Export;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExportDao {
-  public Integer insertList(String order) {
+  public Integer updateById(String id) {
     return null;
   }
 
-  public Integer delete(String order) {
+  public Integer delete(String id) {
     return null;
   }
 
-  public Integer findEntity(String order) {
+  public Export findEntity(Export export) {
+    Export result = new Export();
+    return result;
+  }
+
+  public List<Export> findEntityList(Export export) {
+    List<Export> result = new ArrayList<>();
+    return result;
+  }
+
+  public Integer insertEntity(String id) {
     return null;
   }
 
-  public Integer findEntityList(String order) {
-    return null;
-  }
-
-  public Integer insertEntity(String order) {
-    return null;
-  }
-
-  public Integer updateById(String order) {
+  public Integer insertEntityList(List<Export> exports) {
     return null;
   }
 }

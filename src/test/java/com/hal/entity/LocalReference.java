@@ -14,7 +14,7 @@ public class LocalReference {
 
   private String referenceLocal;
 
-  private boolean availableForsale;
+  private boolean availableForSale;
 
   private boolean visible;
 
@@ -24,19 +24,19 @@ public class LocalReference {
 
   private Date updateDate;
 
-  private Date modelStockupdatedate;
+  private Date modelStockupdateDate;
 
-  private Date selfUpdatedate;
+  private Date selfUpdateDate;
 
-  private boolean visibleLastvalue;
+  private boolean visibleLastValue;
 
-  private boolean sellableLastvalue;
+  private boolean sellableLastValue;
 
-  private String visibleSellableproperty;
+  private String visibleSellableProperty;
 
   private String reference;
 
-  private long localModelid;
+  private long localModelId;
 
   public void setId(long id) {
     this.id = id;
@@ -58,8 +58,8 @@ public class LocalReference {
     this.referenceLocal = referenceLocal;
   }
 
-  public void setAvailableForSale(boolean availableForsale) {
-    this.availableForsale = availableForsale;
+  public void setAvailableForSale(boolean availableForSale) {
+    this.availableForSale = availableForSale;
   }
 
   public void setVisible(boolean visible) {
@@ -78,32 +78,32 @@ public class LocalReference {
     this.updateDate = updateDate;
   }
 
-  public void setModelStockupdateDate(Date modelStockupdatedate) {
-    this.modelStockupdatedate = modelStockupdatedate;
+  public void setModelStockupdateDate(Date modelStockupdateDate) {
+    this.modelStockupdateDate = modelStockupdateDate;
   }
 
-  public void setSelfUpdateDate(Date selfUpdatedate) {
-    this.selfUpdatedate = selfUpdatedate;
+  public void setSelfUpdateDate(Date selfUpdateDate) {
+    this.selfUpdateDate = selfUpdateDate;
   }
 
-  public void setVisibleLastValue(boolean visibleLastvalue) {
-    this.visibleLastvalue = visibleLastvalue;
+  public void setVisibleLastValue(boolean visibleLastValue) {
+    this.visibleLastValue = visibleLastValue;
   }
 
-  public void setSellableLastValue(boolean sellableLastvalue) {
-    this.sellableLastvalue = sellableLastvalue;
+  public void setSellableLastValue(boolean sellableLastValue) {
+    this.sellableLastValue = sellableLastValue;
   }
 
-  public void setVisibleSellableProperty(String visibleSellableproperty) {
-    this.visibleSellableproperty = visibleSellableproperty;
+  public void setVisibleSellableProperty(String visibleSellableProperty) {
+    this.visibleSellableProperty = visibleSellableProperty;
   }
 
   public void setReference(String reference) {
     this.reference = reference;
   }
 
-  public void setLocalModelId(long localModelid) {
-    this.localModelid = localModelid;
+  public void setLocalModelId(long localModelId) {
+    this.localModelId = localModelId;
   }
 
   public long getId() {
@@ -127,7 +127,7 @@ public class LocalReference {
   }
 
   public boolean isAvailableForSale() {
-    return availableForsale;
+    return availableForSale;
   }
 
   public boolean isVisible() {
@@ -147,23 +147,23 @@ public class LocalReference {
   }
 
   public Date getModelStockupdateDate() {
-    return modelStockupdatedate;
+    return modelStockupdateDate;
   }
 
   public Date getSelfUpdateDate() {
-    return selfUpdatedate;
+    return selfUpdateDate;
   }
 
   public boolean isVisibleLastValue() {
-    return visibleLastvalue;
+    return visibleLastValue;
   }
 
   public boolean isSellableLastValue() {
-    return sellableLastvalue;
+    return sellableLastValue;
   }
 
   public String getVisibleSellableProperty() {
-    return visibleSellableproperty;
+    return visibleSellableProperty;
   }
 
   public String getReference() {
@@ -171,6 +171,6 @@ public class LocalReference {
   }
 
   public long getLocalModelId() {
-    return localModelid;
+    return localModelId;
   }
 }

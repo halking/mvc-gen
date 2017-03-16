@@ -1,30 +1,35 @@
 package com.hal.dao;
 
+import com.hal.entity.ReferencePrice;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReferencePriceDao {
-  public Integer insertList(String order) {
+  public Integer updateById(String id) {
     return null;
   }
 
-  public Integer delete(String order) {
+  public Integer delete(String id) {
     return null;
   }
 
-  public Integer findEntity(String order) {
+  public ReferencePrice findEntity(ReferencePrice referenceprice) {
+    ReferencePrice result = new ReferencePrice();
+    return result;
+  }
+
+  public List<ReferencePrice> findEntityList(ReferencePrice referenceprice) {
+    List<ReferencePrice> result = new ArrayList<>();
+    return result;
+  }
+
+  public Integer insertEntity(String id) {
     return null;
   }
 
-  public Integer findEntityList(String order) {
-    return null;
-  }
-
-  public Integer insertEntity(String order) {
-    return null;
-  }
-
-  public Integer updateById(String order) {
+  public Integer insertEntityList(List<ReferencePrice> referenceprices) {
     return null;
   }
 }

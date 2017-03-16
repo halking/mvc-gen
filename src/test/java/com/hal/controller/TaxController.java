@@ -1,30 +1,35 @@
 package com.hal.controller;
 
+import com.hal.entity.Tax;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaxController {
-  public Integer insertList(String order) {
+  public Integer updateById(String id) {
     return null;
   }
 
-  public Integer delete(String order) {
+  public Integer delete(String id) {
     return null;
   }
 
-  public Integer findEntity(String order) {
+  public Tax findEntity(Tax tax) {
+    Tax result = new Tax();
+    return result;
+  }
+
+  public List<Tax> findEntityList(Tax tax) {
+    List<Tax> result = new ArrayList<>();
+    return result;
+  }
+
+  public Integer insertEntity(String id) {
     return null;
   }
 
-  public Integer findEntityList(String order) {
-    return null;
-  }
-
-  public Integer insertEntity(String order) {
-    return null;
-  }
-
-  public Integer updateById(String order) {
+  public Integer insertEntityList(List<Tax> taxs) {
     return null;
   }
 }

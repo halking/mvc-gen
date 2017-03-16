@@ -13,9 +13,9 @@ public class LocalReferenceOverwrite {
 
   private boolean visible;
 
-  private boolean availableForsale;
+  private boolean availableForSale;
 
-  private String visibleSellableproperty;
+  private String visibleSellableProperty;
 
   public void setId(long id) {
     this.id = id;
@@ -37,12 +37,12 @@ public class LocalReferenceOverwrite {
     this.visible = visible;
   }
 
-  public void setAvailableForSale(boolean availableForsale) {
-    this.availableForsale = availableForsale;
+  public void setAvailableForSale(boolean availableForSale) {
+    this.availableForSale = availableForSale;
   }
 
-  public void setVisibleSellableProperty(String visibleSellableproperty) {
-    this.visibleSellableproperty = visibleSellableproperty;
+  public void setVisibleSellableProperty(String visibleSellableProperty) {
+    this.visibleSellableProperty = visibleSellableProperty;
   }
 
   public long getId() {
@@ -66,10 +66,10 @@ public class LocalReferenceOverwrite {
   }
 
   public boolean isAvailableForSale() {
-    return availableForsale;
+    return availableForSale;
   }
 
   public String getVisibleSellableProperty() {
-    return visibleSellableproperty;
+    return visibleSellableProperty;
   }
 }

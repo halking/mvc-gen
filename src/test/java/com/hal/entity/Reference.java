@@ -14,13 +14,13 @@ public class Reference {
 
   private String serialNumber;
 
-  private boolean availableForsale;
+  private boolean availableForSale;
 
   private boolean visible;
 
   private Date updateDate;
 
-  private Date selfUpdatedate;
+  private Date selfUpdateDate;
 
   public void setId(long id) {
     this.id = id;
@@ -42,8 +42,8 @@ public class Reference {
     this.serialNumber = serialNumber;
   }
 
-  public void setAvailableForSale(boolean availableForsale) {
-    this.availableForsale = availableForsale;
+  public void setAvailableForSale(boolean availableForSale) {
+    this.availableForSale = availableForSale;
   }
 
   public void setVisible(boolean visible) {
@@ -54,8 +54,8 @@ public class Reference {
     this.updateDate = updateDate;
   }
 
-  public void setSelfUpdateDate(Date selfUpdatedate) {
-    this.selfUpdatedate = selfUpdatedate;
+  public void setSelfUpdateDate(Date selfUpdateDate) {
+    this.selfUpdateDate = selfUpdateDate;
   }
 
   public long getId() {
@@ -79,7 +79,7 @@ public class Reference {
   }
 
   public boolean isAvailableForSale() {
-    return availableForsale;
+    return availableForSale;
   }
 
   public boolean isVisible() {
@@ -91,6 +91,6 @@ public class Reference {
   }
 
   public Date getSelfUpdateDate() {
-    return selfUpdatedate;
+    return selfUpdateDate;
   }
 }

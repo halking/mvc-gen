@@ -1,30 +1,35 @@
 package com.hal.services;
 
+import com.hal.entity.Channel;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChannelService {
-  public Integer insertList(String order) {
+  public Integer updateById(String id) {
     return null;
   }
 
-  public Integer delete(String order) {
+  public Integer delete(String id) {
     return null;
   }
 
-  public Integer findEntity(String order) {
+  public Channel findEntity(Channel channel) {
+    Channel result = new Channel();
+    return result;
+  }
+
+  public List<Channel> findEntityList(Channel channel) {
+    List<Channel> result = new ArrayList<>();
+    return result;
+  }
+
+  public Integer insertEntity(String id) {
     return null;
   }
 
-  public Integer findEntityList(String order) {
-    return null;
-  }
-
-  public Integer insertEntity(String order) {
-    return null;
-  }
-
-  public Integer updateById(String order) {
+  public Integer insertEntityList(List<Channel> channels) {
     return null;
   }
 }

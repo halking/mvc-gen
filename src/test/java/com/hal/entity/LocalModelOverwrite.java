@@ -9,11 +9,11 @@ public class LocalModelOverwrite {
 
   private String brand;
 
-  private String modelNumberlocal;
+  private String modelNumberLocal;
 
   private boolean visible;
 
-  private boolean availableForsale;
+  private boolean availableForSale;
 
   public void setId(long id) {
     this.id = id;
@@ -27,16 +27,16 @@ public class LocalModelOverwrite {
     this.brand = brand;
   }
 
-  public void setModelNumberLocal(String modelNumberlocal) {
-    this.modelNumberlocal = modelNumberlocal;
+  public void setModelNumberLocal(String modelNumberLocal) {
+    this.modelNumberLocal = modelNumberLocal;
   }
 
   public void setVisible(boolean visible) {
     this.visible = visible;
   }
 
-  public void setAvailableForSale(boolean availableForsale) {
-    this.availableForsale = availableForsale;
+  public void setAvailableForSale(boolean availableForSale) {
+    this.availableForSale = availableForSale;
   }
 
   public long getId() {
@@ -52,7 +52,7 @@ public class LocalModelOverwrite {
   }
 
   public String getModelNumberLocal() {
-    return modelNumberlocal;
+    return modelNumberLocal;
   }
 
   public boolean isVisible() {
@@ -60,6 +60,6 @@ public class LocalModelOverwrite {
   }
 
   public boolean isAvailableForSale() {
-    return availableForsale;
+    return availableForSale;
   }
 }

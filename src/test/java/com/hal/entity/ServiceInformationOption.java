@@ -5,7 +5,7 @@ import java.lang.String;
 public class ServiceInformationOption {
   private long id;
 
-  private long serviceInformationid;
+  private long serviceInformationId;
 
   private String characteristic;
 
@@ -15,8 +15,8 @@ public class ServiceInformationOption {
     this.id = id;
   }
 
-  public void setServiceInformationId(long serviceInformationid) {
-    this.serviceInformationid = serviceInformationid;
+  public void setServiceInformationId(long serviceInformationId) {
+    this.serviceInformationId = serviceInformationId;
   }
 
   public void setCharacteristic(String characteristic) {
@@ -32,7 +32,7 @@ public class ServiceInformationOption {
   }
 
   public long getServiceInformationId() {
-    return serviceInformationid;
+    return serviceInformationId;
   }
 
   public String getCharacteristic() {
