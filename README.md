@@ -1,8 +1,8 @@
 ## **MvcGen** ##
 
 MvcGen is a code generator of mvc pattern. It use JavaPoet to generate field,
-method,parameter,class and .java file.
-baseconf.properties is base configurted file.
+method,parameter,class and `.java` file.
+baseconf.properties is base configurated file.
 
 When using `MvcGen`, please modify the corresponding conf in baseconf.properties. 
 
