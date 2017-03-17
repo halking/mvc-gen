@@ -86,7 +86,7 @@ try {
 ```
 DownLoad
 ------
-Download the [latest.jar(https://github.com/halking/mvc-gen/releases) or depend via maven
+Download the [latest.jar](https://github.com/halking/mvc-gen/releases) or depend via maven
 
 ```xml
 <dependency>
