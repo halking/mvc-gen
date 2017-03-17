@@ -53,8 +53,9 @@ public static List<MethodSpec> addMethod() {
 ParameterSpec parameterSpec = ParameterSpec.builder(String.class,"order").build();
 List<MethodSpec> methodList = new ArrayList<MethodSpec>();
 for (String method:MethodConstant.methods) {
-	MethodSpec methodDesc = MethodSpec.methodBuilder(method).addModifiers(Modifier.PUBLIC).returns(Integer.class)
-			.addParameter(parameterSpec).addStatement("return null").build();
+	MethodSpec methodDesc = MethodSpec.methodBuilder(method).addModifiers(Modifier.PUBLIC)
+	.returns(Integer.class)
+	.addParameter(parameterSpec).addStatement("return null").build();
 	methodList.add(methodDesc);
 }
 return methodList;
@@ -73,7 +74,8 @@ File file = new File(root + "/src/main/java/baseconf.properties");
 try {
 	PropertyFactory factory = new PropertyFactory(file);
 	boolean flag = true;
-	String[] ignores ={"CountryCodeMapping","Export","LocalModel","LocalModelLabel","LocalModelOverwrite","LocalModelLabel"};
+	String[] ignores ={"CountryCodeMapping","Export","LocalModel",
+	"LocalModelLabel","LocalModelOverwrite","LocalModelLabel"};
 	Set<String> noreSet = Arrays.stream(ignores).collect(Collectors.toSet());
 	List<MethodSpec> methodList = addMethod();
 	PoetApply apply = PoetApply.codeBuilder(factory,methodList).defaultFlag(flag).build();
