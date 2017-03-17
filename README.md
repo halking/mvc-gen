@@ -84,4 +84,14 @@ try {
 	e.printStackTrace();
 }
 ```
+DownLoad
+------
+Download the `latest.jar` or depend via maven
 
+```xml
+<dependency>
+	<groupId>com.github.halking</groupId>
+	<artifactId>mvc-gen</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
