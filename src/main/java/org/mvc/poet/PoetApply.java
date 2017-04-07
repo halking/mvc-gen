@@ -103,7 +103,7 @@ public class PoetApply {
 
 	public void buildService(String table, List<MethodSpec> methodSpecs) {
 		try {
-			TypeSpec typeSpec = TypeSpec.classBuilder(table + PropertiesConstant.SERVICE_SUFFIX).addModifiers(Modifier.PUBLIC)
+			TypeSpec typeSpec = TypeSpec.classBuilder(table + PropertiesConstant.SERVICE_IMPL_SUFFIX).addModifiers(Modifier.PUBLIC)
 					.addMethods(methodSpecs).build();
 			JavaFile javaFile = JavaFile.builder(factory.getProperty("service.pkg"), typeSpec).build();
 			javaFile.writeTo(new File(factory.getProperty("project.dir")));
