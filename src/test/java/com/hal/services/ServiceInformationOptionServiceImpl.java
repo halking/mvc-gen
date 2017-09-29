@@ -6,7 +6,7 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceInformationOptionService {
+public class ServiceInformationOptionServiceImpl {
   public Integer updateById(String id) {
     return null;
   }

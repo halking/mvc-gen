@@ -1,12 +1,12 @@
-package com.hal.dao;
+package com.hal.services;
 
-import com.hal.entity.Reference;
+import com.hal.entity.Tax;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReferenceDao {
+public class TaxServiceImpl {
   public Integer updateById(String id) {
     return null;
   }
@@ -15,13 +15,13 @@ public class ReferenceDao {
     return null;
   }
 
-  public Reference findEntity(Reference reference) {
-    Reference result = new Reference();
+  public Tax findEntity(Tax tax) {
+    Tax result = new Tax();
     return result;
   }
 
-  public List<Reference> findEntityList(Reference reference) {
-    List<Reference> result = new ArrayList<>();
+  public List<Tax> findEntityList(Tax tax) {
+    List<Tax> result = new ArrayList<>();
     return result;
   }
 
@@ -29,7 +29,7 @@ public class ReferenceDao {
     return null;
   }
 
-  public Integer insertEntityList(List<Reference> references) {
+  public Integer insertEntityList(List<Tax> taxs) {
     return null;
   }
 }

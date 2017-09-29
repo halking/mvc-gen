@@ -6,7 +6,7 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountryCodeMappingService {
+public class CountryCodeMappingServiceImpl {
   public Integer updateById(String id) {
     return null;
   }

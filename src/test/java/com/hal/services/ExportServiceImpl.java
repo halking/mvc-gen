@@ -1,12 +1,12 @@
-package com.hal.dao;
+package com.hal.services;
 
-import com.hal.entity.Channel;
+import com.hal.entity.Export;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChannelDao {
+public class ExportServiceImpl {
   public Integer updateById(String id) {
     return null;
   }
@@ -15,13 +15,13 @@ public class ChannelDao {
     return null;
   }
 
-  public Channel findEntity(Channel channel) {
-    Channel result = new Channel();
+  public Export findEntity(Export export) {
+    Export result = new Export();
     return result;
   }
 
-  public List<Channel> findEntityList(Channel channel) {
-    List<Channel> result = new ArrayList<>();
+  public List<Export> findEntityList(Export export) {
+    List<Export> result = new ArrayList<>();
     return result;
   }
 
@@ -29,7 +29,7 @@ public class ChannelDao {
     return null;
   }
 
-  public Integer insertEntityList(List<Channel> channels) {
+  public Integer insertEntityList(List<Export> exports) {
     return null;
   }
 }

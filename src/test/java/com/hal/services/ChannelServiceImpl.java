@@ -1,12 +1,12 @@
-package com.hal.dao;
+package com.hal.services;
 
-import com.hal.entity.Model;
+import com.hal.entity.Channel;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelDao {
+public class ChannelServiceImpl {
   public Integer updateById(String id) {
     return null;
   }
@@ -15,13 +15,13 @@ public class ModelDao {
     return null;
   }
 
-  public Model findEntity(Model model) {
-    Model result = new Model();
+  public Channel findEntity(Channel channel) {
+    Channel result = new Channel();
     return result;
   }
 
-  public List<Model> findEntityList(Model model) {
-    List<Model> result = new ArrayList<>();
+  public List<Channel> findEntityList(Channel channel) {
+    List<Channel> result = new ArrayList<>();
     return result;
   }
 
@@ -29,7 +29,7 @@ public class ModelDao {
     return null;
   }
 
-  public Integer insertEntityList(List<Model> models) {
+  public Integer insertEntityList(List<Channel> channels) {
     return null;
   }
 }

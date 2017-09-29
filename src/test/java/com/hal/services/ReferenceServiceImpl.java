@@ -1,12 +1,12 @@
 package com.hal.services;
 
-import com.hal.entity.RefChannel;
+import com.hal.entity.Reference;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RefChannelService {
+public class ReferenceServiceImpl {
   public Integer updateById(String id) {
     return null;
   }
@@ -15,13 +15,13 @@ public class RefChannelService {
     return null;
   }
 
-  public RefChannel findEntity(RefChannel refchannel) {
-    RefChannel result = new RefChannel();
+  public Reference findEntity(Reference reference) {
+    Reference result = new Reference();
     return result;
   }
 
-  public List<RefChannel> findEntityList(RefChannel refchannel) {
-    List<RefChannel> result = new ArrayList<>();
+  public List<Reference> findEntityList(Reference reference) {
+    List<Reference> result = new ArrayList<>();
     return result;
   }
 
@@ -29,7 +29,7 @@ public class RefChannelService {
     return null;
   }
 
-  public Integer insertEntityList(List<RefChannel> refchannels) {
+  public Integer insertEntityList(List<Reference> references) {
     return null;
   }
 }

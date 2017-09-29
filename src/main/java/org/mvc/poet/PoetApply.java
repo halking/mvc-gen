@@ -33,11 +33,13 @@ public class PoetApply {
 
 	private PropertyFactory factory;
 	private List<MethodSpec> methodSpecs;
+	private List<MethodSpec> interfaceSpecs;
 	private List<ParameterSpec> parameterSpecs;
-	//Ignoring set of unbuliding mudule
-	private Set<String> ignores;    
+	// Ignoring set of unbuliding mudule
+	private Set<String> ignores;
+	private Set<String> requireds;
 	// If it is true, starting ignore module feature
-	private boolean ignoreFlag = false;  
+	private boolean ignoreFlag = false;
 
 	public PoetApply(PropertyFactory factory) {
 		this.factory = factory;
@@ -46,6 +48,7 @@ public class PoetApply {
 	private PoetApply(Builder builder) {
 		this.factory = builder.factory;
 		this.methodSpecs = builder.methodSpecs;
+		this.interfaceSpecs = interfaceSpecs;
 		this.parameterSpecs = builder.parameterSpecs;
 		this.ignores = builder.ignores;
 		this.ignoreFlag = builder.ignoreFlag;
@@ -93,8 +96,8 @@ public class PoetApply {
 		try {
 			TypeSpec typeSpec = TypeSpec.classBuilder(table + PropertiesConstant.DAO_SUFFIX).addModifiers(Modifier.PUBLIC)
 					.addMethods(methodSpecs).build();
-			JavaFile javaFile = JavaFile.builder(factory.getProperty("dao.pkg"), typeSpec).build();
-			javaFile.writeTo(new File(factory.getProperty("project.dir")));
+			JavaFile javaFile = JavaFile.builder(factory.getProperty(PropertiesConstant.DAO_PKG), typeSpec).build();
+			javaFile.writeTo(new File(factory.getProperty(PropertiesConstant.PROJECT_DIR)));
 			// javaFile.writeTo(System.out);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -103,10 +106,12 @@ public class PoetApply {
 
 	public void buildService(String table, List<MethodSpec> methodSpecs) {
 		try {
+			TypeSpec interfaceType = TypeSpec.interfaceBuilder(table+PropertiesConstant.SERVICE_API_SUFFIX).addModifiers(Modifier.PUBLIC).
+					addMethods(methodSpecs).build();
 			TypeSpec typeSpec = TypeSpec.classBuilder(table + PropertiesConstant.SERVICE_IMPL_SUFFIX).addModifiers(Modifier.PUBLIC)
-					.addMethods(methodSpecs).build();
-			JavaFile javaFile = JavaFile.builder(factory.getProperty("service.pkg"), typeSpec).build();
-			javaFile.writeTo(new File(factory.getProperty("project.dir")));
+					.addMethods(methodSpecs).addSuperinterface(interfaceType.getClass()).build();
+			JavaFile javaFile = JavaFile.builder(factory.getProperty(PropertiesConstant.SERVICE_PKG), typeSpec).build();
+			javaFile.writeTo(new File(factory.getProperty(PropertiesConstant.PROJECT_DIR)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -116,14 +121,26 @@ public class PoetApply {
 		try {
 			TypeSpec typeSpec = TypeSpec.classBuilder(table + PropertiesConstant.CONTROLLER_SUFFIX).addModifiers(Modifier.PUBLIC)
 					.addMethods(methodSpecs).build();
-			JavaFile javaFile = JavaFile.builder(factory.getProperty("controller.pkg"), typeSpec).build();
-			javaFile.writeTo(new File(factory.getProperty("project.dir")));
+			JavaFile javaFile = JavaFile.builder(factory.getProperty(PropertiesConstant.CONTROLLER_PKG), typeSpec).build();
+			javaFile.writeTo(new File(factory.getProperty(PropertiesConstant.PROJECT_DIR)));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
+	
+	private void buildServiceApi(String name,List<MethodSpec> methodSpecs){
+		try {
+			TypeSpec typeSpec = TypeSpec.classBuilder(name + PropertiesConstant.SERVICE_API_SUFFIX).addModifiers(Modifier.PUBLIC)
+					.addMethods(methodSpecs).build();
+			JavaFile javaFile = JavaFile.builder(factory.getProperty(PropertiesConstant.SERVICE_API_PKG), typeSpec).build();
+			javaFile.writeTo(new File(factory.getProperty(PropertiesConstant.PROJECT_DIR)));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void buildCommonInterface(String... params) {
 
 	}
@@ -133,7 +150,7 @@ public class PoetApply {
 			Class<Object>[] classes = ReflectUtil.getAllClasses(factory.getProperty("entity.pkg"));
 			for (Class<Object> object : classes) {
 				String className = object.getSimpleName();
-				if (this.ignoreFlag == true && ignores != null && ignores.contains(className)) 
+				if (this.ignoreFlag && ignores != null && ignores.contains(className))
 					continue;
 				this.methodSpecs = addMethod(object);
 				buildDao(className, this.methodSpecs);
@@ -151,7 +168,7 @@ public class PoetApply {
 			Class<Object>[] classes = ReflectUtil.getAllClasses(factory.getProperty("entity.pkg"));
 			for (Class<Object> object : classes) {
 				String className = object.getSimpleName();
-				if (this.ignoreFlag == true && ignores != null && ignores.contains(className)) 
+				if (this.ignoreFlag && ignores != null && ignores.contains(className))
 					continue;
 				buildDao(className, this.methodSpecs);
 				buildService(className, this.methodSpecs);
@@ -163,10 +180,26 @@ public class PoetApply {
 		}
 	}
 
-	public static void buildModuleInterface(String... params) {
-
+	public void buildRequired(Set<String> requireds) {
+		try {
+			Class<Object>[] classes = ReflectUtil.getAllClasses(factory.getProperty("entity.pkg"));
+			for (Class<Object> object : classes) {
+				String className = object.getSimpleName();
+				if (!this.ignoreFlag && requireds != null && requireds.contains(className)) {
+					this.methodSpecs = addMethod(object);
+					buildDao(className, this.methodSpecs);
+					buildService(className, this.methodSpecs);
+					buildController(className, this.methodSpecs);
+				} else {
+					continue;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
-
+	
 	private static List<MethodSpec> addMethod(Class<Object> clazz) {
 		List<MethodSpec> methodSpecs = new ArrayList<MethodSpec>();
 		String objectResult = "$T result = new $T()";
@@ -228,9 +261,11 @@ public class PoetApply {
 	public static Builder codeBuilder(PropertyFactory factory) {
 		return new Builder(factory);
 	}
-	public static Builder codeBuilder(PropertyFactory factory,boolean flag) {
-		return new Builder(factory,flag);
+
+	public static Builder codeBuilder(PropertyFactory factory, boolean flag) {
+		return new Builder(factory, flag);
 	}
+
 	public PoetApply addMethodDescs(Iterable<MethodSpec> methodSpecs) {
 		VerdictUtil.checkNotNull(methodSpecs, "methodSpec==null", new Object[0]);
 		for (MethodSpec methodSpec : methodSpecs) {
@@ -249,10 +284,12 @@ public class PoetApply {
 		private Builder(PropertyFactory factory) {
 			this.factory = factory;
 		}
-		private Builder(PropertyFactory factory,boolean flag) {
+
+		private Builder(PropertyFactory factory, boolean flag) {
 			this.factory = factory;
-			this.ignoreFlag =flag;
+			this.ignoreFlag = flag;
 		}
+
 		public Builder addMethodDesc(MethodSpec[] methodSpec) {
 			Collections.addAll(this.methodSpecs, methodSpec);
 			return this;
@@ -275,10 +312,12 @@ public class PoetApply {
 			this.ignores = ignores;
 			return this;
 		}
+
 		public Builder defaultFlag(boolean flag) {
 			this.ignoreFlag = flag;
 			return this;
 		}
+
 		public PoetApply build() {
 			return new PoetApply(this);
 		}

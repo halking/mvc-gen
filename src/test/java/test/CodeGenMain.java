@@ -24,7 +24,7 @@ public class CodeGenMain {
 		File file = new File(root + "/src/main/java/baseconf.properties");
 		try {
 			PropertyFactory factory = new PropertyFactory(file);
-			boolean flag = true;
+			boolean flag = false;
 			String[] ignores ={"CountryCodeMapping","Export","LocalModel","LocalModelLabel","LocalModelOverwrite","LocalModelLabel"};
 			Set<String> noreSet = Arrays.stream(ignores).collect(Collectors.toSet());
 //			List<MethodSpec> methodList = addMethod();
@@ -32,9 +32,10 @@ public class CodeGenMain {
 //			PoetApply apply = PoetApply.codeBuilder(factory,methodList).defaultFlag(flag).build();
 //			PoetApply apply = PoetApply.codeBuilder(factory).build();
 			PoetApply apply = PoetApply.codeBuilder(factory,flag).build();
-			apply.buildAllDefault(null);
+//			apply.buildAllDefault(noreSet);
 //			apply.buildAllDefault(noreSet);
 //			apply.buildAllManual(noreSet);
+			apply.buildRequired(noreSet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

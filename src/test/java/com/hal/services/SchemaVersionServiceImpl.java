@@ -1,4 +1,4 @@
-package com.hal.dao;
+package com.hal.services;
 
 import com.hal.entity.SchemaVersion;
 import java.lang.Integer;
@@ -6,7 +6,7 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchemaVersionDao {
+public class SchemaVersionServiceImpl {
   public Integer updateById(String id) {
     return null;
   }

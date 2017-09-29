@@ -1,4 +1,4 @@
-package com.hal.dao;
+package com.hal.services;
 
 import com.hal.entity.LocalReference;
 import java.lang.Integer;
@@ -6,7 +6,7 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalReferenceDao {
+public class LocalReferenceServiceImpl {
   public Integer updateById(String id) {
     return null;
   }

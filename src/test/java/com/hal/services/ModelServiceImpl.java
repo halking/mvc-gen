@@ -1,12 +1,12 @@
 package com.hal.services;
 
-import com.hal.entity.Reference;
+import com.hal.entity.Model;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReferenceService {
+public class ModelServiceImpl {
   public Integer updateById(String id) {
     return null;
   }
@@ -15,13 +15,13 @@ public class ReferenceService {
     return null;
   }
 
-  public Reference findEntity(Reference reference) {
-    Reference result = new Reference();
+  public Model findEntity(Model model) {
+    Model result = new Model();
     return result;
   }
 
-  public List<Reference> findEntityList(Reference reference) {
-    List<Reference> result = new ArrayList<>();
+  public List<Model> findEntityList(Model model) {
+    List<Model> result = new ArrayList<>();
     return result;
   }
 
@@ -29,7 +29,7 @@ public class ReferenceService {
     return null;
   }
 
-  public Integer insertEntityList(List<Reference> references) {
+  public Integer insertEntityList(List<Model> models) {
     return null;
   }
 }

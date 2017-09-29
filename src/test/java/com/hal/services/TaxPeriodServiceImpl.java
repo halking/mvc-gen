@@ -1,12 +1,12 @@
 package com.hal.services;
 
-import com.hal.entity.Channel;
+import com.hal.entity.TaxPeriod;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChannelService {
+public class TaxPeriodServiceImpl {
   public Integer updateById(String id) {
     return null;
   }
@@ -15,13 +15,13 @@ public class ChannelService {
     return null;
   }
 
-  public Channel findEntity(Channel channel) {
-    Channel result = new Channel();
+  public TaxPeriod findEntity(TaxPeriod taxperiod) {
+    TaxPeriod result = new TaxPeriod();
     return result;
   }
 
-  public List<Channel> findEntityList(Channel channel) {
-    List<Channel> result = new ArrayList<>();
+  public List<TaxPeriod> findEntityList(TaxPeriod taxperiod) {
+    List<TaxPeriod> result = new ArrayList<>();
     return result;
   }
 
@@ -29,7 +29,7 @@ public class ChannelService {
     return null;
   }
 
-  public Integer insertEntityList(List<Channel> channels) {
+  public Integer insertEntityList(List<TaxPeriod> taxperiods) {
     return null;
   }
 }

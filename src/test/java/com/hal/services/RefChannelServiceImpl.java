@@ -1,12 +1,12 @@
 package com.hal.services;
 
-import com.hal.entity.Tax;
+import com.hal.entity.RefChannel;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaxService {
+public class RefChannelServiceImpl {
   public Integer updateById(String id) {
     return null;
   }
@@ -15,13 +15,13 @@ public class TaxService {
     return null;
   }
 
-  public Tax findEntity(Tax tax) {
-    Tax result = new Tax();
+  public RefChannel findEntity(RefChannel refchannel) {
+    RefChannel result = new RefChannel();
     return result;
   }
 
-  public List<Tax> findEntityList(Tax tax) {
-    List<Tax> result = new ArrayList<>();
+  public List<RefChannel> findEntityList(RefChannel refchannel) {
+    List<RefChannel> result = new ArrayList<>();
     return result;
   }
 
@@ -29,7 +29,7 @@ public class TaxService {
     return null;
   }
 
-  public Integer insertEntityList(List<Tax> taxs) {
+  public Integer insertEntityList(List<RefChannel> refchannels) {
     return null;
   }
 }

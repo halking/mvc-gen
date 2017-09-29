@@ -1,4 +1,4 @@
-package com.hal.dao;
+package com.hal.services;
 
 import com.hal.entity.ServiceInformation;
 import java.lang.Integer;
@@ -6,7 +6,7 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceInformationDao {
+public class ServiceInformationServiceImpl {
   public Integer updateById(String id) {
     return null;
   }

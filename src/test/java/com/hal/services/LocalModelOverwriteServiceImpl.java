@@ -6,7 +6,7 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalModelOverwriteService {
+public class LocalModelOverwriteServiceImpl {
   public Integer updateById(String id) {
     return null;
   }
